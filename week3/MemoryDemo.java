@@ -1,28 +1,59 @@
 package com.oop;
 
 public class MemoryDemo {
-    int balance = 1000;
-    int copy = balance;
-    copy = 500;
-System.out.println("balance: " + balance);
-System.out.println("copy: " + copy);
 
-    BankAccount acc1 = new BankAccount();
-    acc1.balance = 1000;
-    BankAccount acc2 = acc1;
-    acc2.balance = 500;
-System.out.println("acc1: " + acc1.balance);
-System.out.println("acc2: " + acc2.balance);
+    public static void main(String[] args) {
+
+
+        System.out.println("=== PART 1: Primitives Don't Share ===");
+        int balance = 1000;
+        int copy = balance;
+        copy = 500;
+
+        System.out.println("balance: " + balance);
+        System.out.println("copy: " + copy);
+        System.out.println();
+
+
+        System.out.println("=== PART 2: References Do Share ===");
+        BankAccount acc1 = new BankAccount();
+        acc1.balance = 1000;
+
+        BankAccount acc2 = acc1;
+        acc2.balance = 500;
+
+        System.out.println("acc1: " + acc1.balance);
+        System.out.println("acc2: " + acc2.balance);
+        System.out.println();
+
+
+        System.out.println("=== PART 3: Passing Objects vs Primitives ===");
+        BankAccount myAccount = new BankAccount();
+        myAccount.balance = 500;
+        applyBonusToAccount(myAccount);
+        System.out.println("myAccount after applyBonusToAccount: " + myAccount.balance);
+
+        int cash = 500;
+        applyBonusToAmount(cash);
+        System.out.println("cash after applyBonusToAmount: " + cash);
+        System.out.println();
+
+
+        System.out.println("=== PART 4: Null and NullPointerException ===");
+        BankAccount acc3 = null;
+        if (acc3 != null) {
+            System.out.println("acc3.balance: " + acc3.balance);
+        } else {
+            System.out.println("Account not found (acc3 is null)");
+        }
+    }
+
 
     public static void applyBonusToAccount(BankAccount acc) {
         acc.balance = acc.balance + 100;
     }
+
     public static void applyBonusToAmount(int amount) {
         amount = amount + 100;
     }
-
-    BankAccount myAccount = new BankAccount();
-    myAccount.balance = 500;
-    applyBonusToAccount(myAccount);
-System.out.println("myAccount: " + myAccount.balance);
 }
